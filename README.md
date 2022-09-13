@@ -10,14 +10,24 @@ In this project I try to investigate:
 2) Whether it is possible to obtain high accuracy of classification without the use of deep neural networks
 3) The weight and impact of generated features on the result of classification
 
-### Dataset
+# Dataset
 
 The Paraphrase Adversaries from Word Scrambling dataset, part of the PAWS-Wiki Labeled (Final), was selected to test and test the machine learning model, as well as to construct the features. The PAWS-Wiki contains 65,401 pairs of sentences, 44.2% of which are paraphrases of each other.
 
-### Features
+# Features
 
 Because different studies use different methodologies (from calculating the number of common n-grams to using deep machine learning methods) to determine semantic similarity and paraphrases, different semantic measurement algorithms need to be compared and/or combined to maximize classification accuracy.
 The following semantic similarity metrics or indicators were chosen for this study: Jaccard index for common n-grams, cosine distance between vector representations of sentences, Word Mover's Distance, WordNet dictionaries (Leacock and Chodorow, Wu and Palmer), predictions made by a Transformer neural network - RoBERTa.
+
+### Jaccard index for common n-grams
+N-gram is a sequence of n words. In the context of developing the detection of paraphrases in the text, the number of common n-grams normalized to the total number of n-grams in both sentences can help identify semantically similar sentences that are close in semantic load, but are not paraphrases because the second sentence was obtained by permutation words in the first sentence, and, accordingly, has a very different meaning.
+```math
+J(A, B) = |A ∩ B|/|A ∪ B|
+```
+
+To calculate n-grams in each sentence, the sentences are first lowercased, all punctuation marks and extra characters are removed. In total, Jaccard index was calculated for 2-, 3-, 4-grams.
+
+### 
 
 # Results
 ⏩ ```evaluate.py```
