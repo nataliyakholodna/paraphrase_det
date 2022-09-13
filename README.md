@@ -21,13 +21,26 @@ The following semantic similarity metrics or indicators were chosen for this stu
 
 ### Jaccard index for common n-grams
 N-gram is a sequence of n words. In the context of developing the detection of paraphrases in the text, the number of common n-grams normalized to the total number of n-grams in both sentences can help identify semantically similar sentences that are close in semantic load, but are not paraphrases because the second sentence was obtained by permutation words in the first sentence, and, accordingly, has a very different meaning.
-```math
-J(A, B) = |A ∩ B|/|A ∪ B|
-```
+![](https://github.com/nataliyakholodna/paraphrase_det/blob/main/images/formulas/jaccard.png)
 
 To calculate n-grams in each sentence, the sentences are first lowercased, all punctuation marks and extra characters are removed. In total, Jaccard index was calculated for 2-, 3-, 4-grams.
 
-### 
+### Cosine distance between vector representations of sentences
+
+There is a great variety of methods for obtaining vector attachments of words GloVe, Word2Vec: CBOW / Skip-Gram, fastText. I chose vector embeddings of the BERT deep learning model.
+BERT is a Transformer deep learning model created for NLP tasks. The basic BERT model has 110 million customizable parameters, the extended version has 345 million.
+A feature of the Transformer architecture is the presence of a mechanism of attention, so that data can be processed simultaneously (as opposed to recurrent neural networks, where data is perceived sequentially). In addition, the feature of BERT is the pre training of the neural network to solve two tasks: the prediction of a word in a sentence and determine whether the second sentence is a logical continuation of the first. The machine learning model was previously trained on unlabelled data from BooksCorpus (800 million words) and English Wikipedia (2,500 million words). Pretraining and attention mechanism allow to obtain contextualised word embeddings.
+Using a pre-learned model, the vector representation matrix for each sentence has the following dimensions: torch.Size ([1, 128, 768]), where 1 is the number of sentences in the batch, 128 is the maximum sentence length, 768 is the dimension of the vector embedding. For the vector representation of sentences, the data were averaged for each word in the sentence, resulting in an embedding vector with a length of 768 values.
+Cosine distance is calculated as follows:
+
+![](https://github.com/nataliyakholodna/paraphrase_det/blob/main/images/formulas/cosine_sim.png)
+
+
+### Word Mover's Distance
+
+### Distances by WordNet dictionaries
+
+### RoBERTa neural network
 
 # Results
 ⏩ ```evaluate.py```
