@@ -49,7 +49,7 @@ The most important features for classification are the Jaccard index for 3-grams
 
 Despite great accuracy, RoBERTa classifies more negative classes as positive, while **reducing the recall to pairs of sentences that are not paraphrases** of each other:
 
-![](https://github.com/nataliyakholodna/paraphrase_det/blob/main/images/class_report_3.png)
+<img src="https://github.com/nataliyakholodna/paraphrase_det/blob/main/images/class_report_3.png">
 ![](https://github.com/nataliyakholodna/paraphrase_det/blob/main/images/matrix_3.png)
 
 Smaller recall of the model may lead to incorrect allegations of plagiarism or incorrect aggregation of user-generated content.
