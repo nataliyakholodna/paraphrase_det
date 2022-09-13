@@ -38,9 +38,34 @@ Cosine distance is calculated as follows:
 
 ### Word Mover's Distance
 
+Word Mover's Distance uses vector embeddings to calculate the semantic distance between sentences. WMD distance measures the difference between two text documents as the minimum distance that word embedding vector of one document must "come" to reach the embedding vector of another document.
+
 ### Distances by WordNet dictionaries
 
+To measure the semantic similarity of sentences, two metrics of semantic distance of synsets from WordNet dictionaries were used: Leacock and Chodorow, Wu and Palmer.
+The semantic similarity of words according to Leacock and Chodorow is determined by the following formula:
+
+![](https://github.com/nataliyakholodna/paraphrase_det/blob/main/images/formulas/leacock_chodorow.png)
+
+where length is the length of the shortest path between two concepts (number of nodes), D is the maximum depth of the corresponding taxonomy.
+The function of the semantic distance Wu and Palmer depends on the depth of the two concepts ```depth(concept_i)```  in the taxonomy and the depth of their nearest common ancestor depth (LCS):
+
+![](https://github.com/nataliyakholodna/paraphrase_det/blob/main/images/formulas/wu_parmer.png)
+
+Because WordNet calculates the distance for each pair of synsets separately, the approach proposed by researchers Courtney Corley and Rada Mihalcea was used to represent the distance between two sentences. To introduce bidirectionality, the arithmetic mean of two values of a certain distance is used, the value of which depends on the maximum similarity of the word pair. However, in this case the specificity of words is not taken into account (there is no multiplication by the value of tf-idf). Thus, to calculate the distances between a pair of sentences, one has to compare each word of the first with each word of the second.
+
+
 ### RoBERTa neural network
+
+RoBERTa's pre-trained neural network can be considered an improved analogue of BERT: its main difference is the selection of hyperparameters during pre-training, increasing the volume of the corpus (16GB sentences from Books Corpus and English Wikipedia, CommonCrawl News dataset (63 million articles, 76 GB) , Web text corpus (38 GB), Stories from Common Crawl (31 GB)), the use of dynamic token masking for word prediction in a sentence: the word to be predicted in a particular sentence changes with each epoch.
+RoBERTa has 124 million customizable parameters. Because the result of direct propagation is a matrix of vector attachments (batch size, max sentence length, embedding dimension), a hidden and fully connected source layer with 256 and 1 neurons, respectively, was added for further classification. Similar to the item "Cosine distance…", to obtain a vector representation of sentences, the average value was obtained for each coordinate of the attachment vectors. The resulting matrix of weights between the obtained vector representations of words and the hidden layer with 256 neurons will have a dimension of 768 * 256, between the hidden and the original layer - 256 * 1. The activation function of the last layer is the sigmoid, the loss function is binary cross-entropy.
+
+The pre-trained neural network was fine-tuned to detect paraphrases in the text using training and validation samples. In total, the neural network was additionally trained for 50 epochs, the weights were preserved at the lowest value of the loss function in the validation sample (last epoch).
+
+![](https://github.com/nataliyakholodna/paraphrase_det/blob/main/images/formulas/roberta.png)
+
+For the final combination of features, both the probabilities that two records belong to a certain class and the predictions themselves were chosen. Decision threshold = 0.5, i.e., y ̂ = 1 if p(y ̂ )>0.5.
+The final table contains 10 features with the above metrics for each pair of sentences available in the selected dataset. These features were calculated for the training, test and validation samples.
 
 # Results
 ⏩ ```evaluate.py```
