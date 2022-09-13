@@ -219,7 +219,7 @@ X_test = pd.DataFrame({
 
 X_test.head()
 
-# X_test.to_csv('microsoft_features.csv')
+# X_test.to_csv('features.csv')
 
 df.head()
 

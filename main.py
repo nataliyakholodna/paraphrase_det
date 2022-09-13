@@ -197,20 +197,20 @@ def roberta_prediction(s1, s2):
     return pred, pred_int
 
 
-# pred_raw, pred_int = roberta_prediction(sent1, sent2)
-#
-# X = [[
-#     get_cosine(sent1, sent2),
-#     n_gram_sim(sent1, sent2, 3),
-#     n_gram_sim(sent1, sent2, 2),
-#     n_gram_sim(sent1, sent2, 4),
-#     pred_raw,
-#     pred_int,
-#     wordnet_distance(sent1, sent2),
-#     word_movers(sent1, sent2)
-# ]]
-#
-# print(X)
+pred_raw, pred_int = roberta_prediction(sent1, sent2)
+
+X = [[
+    get_cosine(sent1, sent2),
+    n_gram_sim(sent1, sent2, 3),
+    n_gram_sim(sent1, sent2, 2),
+    n_gram_sim(sent1, sent2, 4),
+    pred_raw,
+    pred_int,
+    wordnet_distance(sent1, sent2),
+    word_movers(sent1, sent2)
+]]
+
+print(X)
 
 loaded_model = pickle.load(open('model_selected_features.pkl', 'rb'))
 predicted = loaded_model.predict(X)
@@ -218,9 +218,3 @@ predicted = loaded_model.predict(X)
 print('Predicted label', predicted[0])
 print('Predicted probability', loaded_model.predict_proba(X))
 
-st.markdown('<h3 style="text-align:center;">Welcome!</h3>',
-            unsafe_allow_html=True)
-col1, col2 = st.columns(2)
-sent1 = col1.text_input('Sentence 1')
-sent2 = col2.text_input('Sentence 2')
-check = st.form_submit_button('Check!')
