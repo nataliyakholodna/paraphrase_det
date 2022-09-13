@@ -31,15 +31,15 @@ The results obtained are as follows:
 
 As it can be seen in the classification report and confusion matrix for the test set, logistic regression erroneously marked almost twice as many **negative records as positive** than positive as negative.
 
-![Classification report](images/class_report_1.png)
-![Confusion matrix](images/confusion_matrix_1.png)
+![Classification report](https://github.com/nataliyakholodna/paraphrase_det/blob/main/images/class_report_1.png)
+![Confusion matrix](https://github.com/nataliyakholodna/paraphrase_det/blob/main/images/confusion_matrix_1.png)
 
 ### Without RoBERTa's prediction
 
 * Accuracy of classification on the test data set - 71.15%, area under the Precision-Recall curve - 73.1%.
 The most important features for classification are the Jaccard index for 3-grams (normalized number of common 3-grams) and the cosine distance between vector representations of sentences.
 
-![Feature importance](images/feature_imp_2.png)
+![Feature importance](https://github.com/nataliyakholodna/paraphrase_det/blob/main/images/feature_imp_2.png)
 
 ### RoBERTa classification results
 
@@ -49,8 +49,8 @@ The most important features for classification are the Jaccard index for 3-grams
 
 Despite great accuracy, RoBERTa classifies more negative classes as positive, while **reducing the recall to pairs of sentences that are not paraphrases** of each other:
 
-![](images/class_report_3.png)
-![](images/matrix_3.png)
+![](https://github.com/nataliyakholodna/paraphrase_det/blob/main/images/class_report_3.png)
+![](https://github.com/nataliyakholodna/paraphrase_det/blob/main/images/matrix_3.png)
 
 Smaller recall of the model may lead to incorrect allegations of plagiarism or incorrect aggregation of user-generated content.
 
