@@ -21,6 +21,7 @@ The following semantic similarity metrics or indicators were chosen for this stu
 
 ### Jaccard index for common n-grams
 N-gram is a sequence of n words. In the context paraphrase detection in the text, the number of common n-grams divided by the total number of n-grams in both sentences can help identify semantically similar sentences that are close in their meaning but are not paraphrases because the second sentence was obtained by permutation of words in the first sentence, and, accordingly, has a very different meaning.
+
 ![](https://github.com/nataliyakholodna/paraphrase_det/blob/main/images/formulas/jaccard.png)
 
 To calculate n-grams in each sentence, the sentences are first lowercased, all punctuation marks and extra characters are removed. In total, Jaccard index was calculated for 2-, 3-, 4-grams.
