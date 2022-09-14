@@ -109,12 +109,24 @@ Smaller recall of the model may lead to incorrect allegations of plagiarism or i
 
 Transformer neural networks do not require additional generation of features and are able to detect paraphrasing with high accuracy. The disadvantage of this type of networks is a significant number of parameters (and, accordingly, a long time to calculate the results).
 
+# Project structure
+```
+.
+├── data            
+│    ├── features   
+│    │   └── *.csv  # Generated features  
+│    └── paws
+│        └── *.tsv  # Original paws data
+├── evaluate.ipynb  # Evaluation notebook
+├── train_model.py  # Train logistic regression, save as *.pkl
+├── constants.py    # Path to features, y labels
+├── merge.py        # Concatenate files with separate features
+├── main.py         # Load model, make prediction
+├── images 📁       # Readme images
+├── other 📁        # Files with calculated features, respective scripts
 
+```
 
-
-
-
-
-Links:
+### Additional links:
 * [RoBERTA paraphrase detection via Flask API](https://github.com/nataliyakholodna/roberta_paraphrase_detection)
 * [Project's presentation](https://www.canva.com/design/DAE4zcIOvwo/XAH-wxQl0wnIiPhywJEjgw/view?utm_content=DAE4zcIOvwo&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)

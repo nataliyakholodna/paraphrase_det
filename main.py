@@ -1,28 +1,24 @@
 # === Imports ===
-import pandas as pd
-import streamlit as st
 import pickle
 from nltk.corpus import stopwords
 import nltk
 import gensim.downloader as api
 
-### Cosine dist
+# Cosine dist
 import torch
 from sklearn.metrics.pairwise import cosine_similarity
 
 from transformers import AutoModel, AutoTokenizer
-from roberta.predict import Pairs_Dataset, config, Classifier_Model, predict
+from roberta.predict import config, Classifier_Model
 
-### n-grams
+# n-grams
 from nltk.tokenize import word_tokenize
 from nltk.util import ngrams
 
-### wordnet
-from wordnet.wordnet_distances import penn_to_wn, tagged_to_synset, sentence_similarity, symmetric_sentence_similarity
+# wordnet
+from wordnet.wordnet_distances import symmetric_sentence_similarity
 
-from torch.utils.data import Dataset, DataLoader
-
-nltk.download('stopwords',  quiet=True)
+nltk.download('stopwords', quiet=True)
 stop_words = stopwords.words('english')
 model = api.load('word2vec-google-news-300')
 
@@ -217,4 +213,3 @@ predicted = loaded_model.predict(X)
 
 print('Predicted label', predicted[0])
 print('Predicted probability', loaded_model.predict_proba(X))
-
